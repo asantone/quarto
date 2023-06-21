@@ -1,0 +1,68 @@
+---
+title: "Quarto Markdown Basics: Part 3"
+format: html
+tbl-cap-location: top
+---
+
+# Tables
+
+## A basic table
+
+This table has two columns and three content rows. Use the vertical bar and horizontal dash to draw the table. The default style is applied giving you left-aligned content, horizontal lines, and some light formatting for a simple clean appearance.
+
+| Column A   | Column B   |
+|------------|------------|
+| content A1 | content B1 |
+| content A2 | content B2 |
+| content A3 | content B3 |
+
+## Column alignment
+
+Use the colon symbol `:` to indicate alignment as left, right, or center. Notice how the line of dashes has been adjusted:
+
+-   `|-----------------------------------|`
+-   `|:----------|----------:|:---------:|`
+
+| \<-Left    |   Right-\> |   Center   |
+|:-----------|-----------:|:----------:|
+| content A1 | content B1 | content C1 |
+| content A2 | content B2 | content C2 |
+| content A3 | content B3 | content C3 |
+
+## Captions
+
+Tables generally require captions and they are typically located above the table. The easiest solution is to modify the header of the document and add `tbl-cap-location: top` to specify that captions are placed above each table. Captions for figures (images, charts, etc.) are usually placed below.
+
+Before:
+
+> `---`
+>
+> `title: "Quarto Markdown Basics: Part 3"`
+>
+> `format: html`
+>
+> `---`
+
+After:
+
+> `---`
+>
+> `title: "Quarto Markdown Basics: Part 3"`
+>
+> `format: html`
+>
+> `tbl-cap-location: top`
+>
+> `---`
+
+### Column widths: precise adjustment
+
+Below the table, add `:{tbl-colwidths="[20,30,50]"}` to specifiy the widths you want. Here, we set the values as `[20,30,50]` to indicate there are three columns and that the first column should occupy 20% of the width, the second should occupy 30%, and the last column should occupy the remaining 50% of the width.
+
+| Center 20% | Center 30% | Center 50% |
+|:----------:|:----------:|:----------:|
+| content A1 | content B1 | content C1 |
+| content A2 | content B2 | content C2 |
+| content A3 | content B3 | content C3 |
+
+: Alignment table {tbl-colwidths="[20,30,50]"}

@@ -1,0 +1,30 @@
+---
+title: "Quarto Markdown Basics: Part 2"
+format: html
+---
+
+## Images
+
+### Just the image
+
+Write `![This is a photo of a bridge.](img/bridge.png)` to produce:
+
+![This is a photo of a bridge.](img/bridge.png)
+
+### An Image as a link
+
+Add square brackets and a link in parentheses like this: `[![This is a photo of a bridge.](img/bridge.png)](https://www.patreon.com/adamsantone_phd)` to create a linked image like this:
+
+[![This is a linked photo of a bridge you can click to visit my Patreon page.](img/bridge.png)](https://www.patreon.com/adamsantone_phd)
+
+### A linked image with a pop-up description
+
+To create a pop-up label that appears when a user hovers over the image with their cursor, add text in quotes like this: `[![This is a photo of a bridge.](img/bridge.png)](https://www.patreon.com/adamsantone_phd "A bridge!")` to create a linked image like this:
+
+[![This is a linked photo of a bridge with a pop-up description.](img/bridge.png)](https://www.patreon.com/adamsantone_phd "A bridge!")
+
+### A linked image with alt-text
+
+For even better accessibility, you should add alt-text like this: `[![This is a photo of a bridge.](img/bridge.png){fig-alt="Alt text for the bridge image."}](https://www.patreon.com/adamsantone_phd "A bridge")`.
+
+[![This is a linked photo of a bridge with alt-text and a pop-up description.](img/bridge.png){fig-alt="Alt text for the bridge image."}](https://www.patreon.com/adamsantone_phd)

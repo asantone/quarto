@@ -1,0 +1,50 @@
+---
+title: "Quarto Markdown Basics: Part 1"
+format: html
+---
+
+<!--- this is a comment --->
+
+# Header Level 1
+
+It's easy to create *italics*, **bold**, and ***bold italics*** text with Markdown.
+
+## Header Level 2
+
+You may need to use superscript and subscript formatting for exponents like 3^2^ or H~2~O. Note the use of two symbols to wrap the element being moved up or down. The Level 2 Header is automatically styled with a horizontal line underneath it.
+
+### Header Level 3
+
+You may need to use ~~strikethrough~~ text.
+
+#### Header Level 4
+
+You can use backticks to indicate `verbatim text`. That can be useful for writing about code because it uses a monospace font.
+
+##### Header Level 5
+
+Linking to other pages is easy. If you want to show the link, just wrap the link in `<` and `>` like this: <https://www.patreon.com/adamsantone_phd>.
+
+You can also use square brackets and parentheses to indicate an inline link like [My Patreon Page](https://www.patreon.com/adamsantone_phd).
+
+###### Header Level 6
+
+It's easy to add code into your Quarto document by using a pair of three backticks. You can define the language inside of curly brackets and then use that language's style for formatting. Here's some simple R code to add two variables and print the result. Try to change the variable names and numbers to make it your own!
+
+```{r}
+# <-- this symbol is used to start a comment line when you're writing R code
+# comment lines are not "run" as part of the code 
+# you can leave helpful notes for yourself and others! 
+
+# create a variable and give it a value
+variable_1 = 3
+
+#create a second variable and give it a value
+variable_2 = 3
+
+#add the two variables and save the result as a third variable
+variable_3 = variable_1 + variable_2
+
+#print the result
+print(variable_3)
+```
