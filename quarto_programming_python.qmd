@@ -1,0 +1,44 @@
+---
+title: ""
+format:
+  html:
+    code-fold: true
+    code-summary: "CODE"
+---
+
+# Python Programming <br/> in a Quarto Document
+
+## Salary Distribution of Interior Designers <br/> in the United States
+
+```{python}
+#| fig-cap: "A bar chart made with Python"
+
+#import libraries
+
+#pandas is useful for data manipulation and analysis tasks
+import pandas as pd
+
+#matplotlib is used for data visualization
+import matplotlib.pyplot as plt
+
+#data source: https://datausa.io/profile/soc/interior-designers
+#use pandas to read the data from the comma-separated values (.csv) file
+#store the data in a dataframe and print it
+df = pd.read_csv(r'data\salary_distribution_interior_design_USA.csv')
+
+#define the x and y elements
+salary = list(df.iloc[:, 0])
+percentage = list(df.iloc[:, 1])
+  
+# Plot the data using bar() method
+plt.figure().set_figwidth(8)
+plt.bar(salary, percentage, color='#d9b99b')
+plt.title("Wage Distribution of Interior Designers in the United States")
+plt.xlabel("Average Salary", fontsize=12)
+plt.ylabel("Share (%)", fontsize=12)
+plt.xticks(fontsize=10, rotation=45,ha="right", rotation_mode="anchor")
+plt.box(False)
+
+# Show the plot
+plt.show()
+```
