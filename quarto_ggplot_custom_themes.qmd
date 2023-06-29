@@ -1,0 +1,229 @@
+---
+title: "Custom ggplot2 Themes"
+format:
+  html:
+    code-fold: show
+    code-summary: "CODE"
+---
+
+## Prerequisites
+
+This video assumes you have installed and used R and RStudio. I'm using a Quarto document for instruction, but this will work in a standard R script. 
+
+## Goals
+
+I'm going to show you how to define your own custom themes for the ggplot2 data visualization library. This is very useful when you want to create multiple plots that all have the same overall look and feel. 
+
+## Libraries
+
+The following libraries provide extended functionality:
+
+* tibble: data organization
+* tidyr: data rearrangment
+* dplyr: data manipulation
+* ggplot2: data visualization
+* gridExtra: visualization layout
+
+```{r, warning=FALSE, message=FALSE}
+library(tibble)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+```
+
+## Data & Setup
+
+For this tutorial, I'll create some very simple data.
+```{r}
+#simple data
+
+#create a vector of id numbers
+site<-c(sprintf("site_%0.2d",seq(1:50)))
+
+#create 3 vectors of 50 numeric values each 
+#values are sampled from the normal distribution
+species_1<-c(runif(n=50, min=1.0, max=3.0))
+species_2<-c(runif(n=50, min=2.5, max=6.5))
+species_3<-c(runif(n=50, min=4.0, max=9.0))
+
+#create a dataframe to organize the data vectors
+t<-tibble(site, species_1, species_2, species_3)
+
+#display the dataframe
+t
+```
+
+## Tidy up the dataframe
+
+Before passing data to ggplot2 for visualization, I'll first pivot the data to make it "[tidy](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#)":
+
+* Every column is a variable
+* Every row is an observation
+* Every cell is a single value
+
+Be sure to compare this tibble versus the previous one until the change makes sense. Notice that this tidy tibble has many more rows. 
+
+```{r}
+#tidyr is useful for data manipulation and format standardization
+library(tidyr)
+
+#pivot the "wide" data to a "longer" format
+#the column names will now be data points
+t_tidy<- t %>% pivot_longer(!site, names_to = "species", values_to = "measurement")
+
+#display the tidy tibble
+t_tidy
+```
+
+Now the data are in a better format for further manipulation and visualization.
+
+## Basic Visualization with ggplot2
+
+I'll now use our tidy data to generate two plots using a pre-made [theme](https://ggplot2.tidyverse.org/reference/ggtheme.html) included with ggplot. Themes provide an easy way to apply several style choices at once and they serve as a useful stepping stone to customization. 
+
+#### Case 1
+Let's say we want to plot a bar chart of the mean of the measurement by species. First, I'll summarize the values using `dplyr`. 
+
+```{r}
+#create a summary tibble containing the measurement averages by species
+#dplyr has some SQL-like functions
+t_means<-t_tidy %>%
+       group_by(species) %>%
+       summarise_at(vars(measurement), list(average = mean))
+```
+
+Now the data are ready to visualize with ggplot using the well-formatted summary data.
+
+```{r}
+#create the barchart
+plot_barchart<-ggplot(data=t_means, aes(x=species, y=average)) +
+  geom_bar(stat="identity")+
+  labs(title="Average by Species", subtitle="Source: me")+
+  theme_dark()
+
+#display the barchart
+plot_barchart
+```
+
+#### Case 2
+Let's say we want to generate boxplots of the species measurements. 
+
+```{r}
+#create the boxplots
+plot_boxplots<-ggplot(data=t_tidy, aes(x=species, y=measurement)) +
+  geom_boxplot()+
+  labs(title="Average by Species", subtitle="Source: me")+
+  theme_minimal()
+
+#display the boxplots
+plot_boxplots
+```
+
+## Custom theme generation
+
+Now I'll create a custom theme that has some ugly design choices built in. I'll also make a good version. These custom themes will be applied to the plots.
+
+```{r}
+#bad theme
+theme_bad <- function(){ 
+    
+  #fonts   
+  #defaults on Windows: serif, sans, or mono
+  font_1 <- "mono" 
+  font_2 <- "sans"
+  
+  #color palette
+  col_1 <- "#120458"
+  col_2 <- "#7A04EB"
+  col_3 <- "#FE75FE"
+  col_4 <- "#FF00A0"
+  col_5 <- "#FF124F"
+    
+  #the base theme being adjusted
+  #AKA the starting point
+  theme_minimal() %+replace%    
+    
+  theme(
+    #background color
+    panel.background = element_rect(fill=col_2,color=col_5,linewidth=3,linetype="solid"),
+    
+    #background grid lines
+    panel.grid.major = element_line(color=col_5,linewidth = 1,linetype="solid"), 
+    panel.grid.minor = element_line(color=col_3,linewidth = 0.5,linetype="solid"), 
+    
+    #axis text adjustments
+    axis.text.x      = element_text(family="", face="plain", color=col_5, size=10, angle=0, margin=margin(5, b = 10)),
+    axis.text.y      = element_text(family="", face="plain", color=col_5, size=10, angle=0, margin=margin(5, b = 10)),
+    axis.title.x     = element_text(family="", face="bold",  color=col_2, size=10, angle=0, margin=margin(5, b = 10)),
+    axis.title.y     = element_text(family="", face="bold",  color=col_2, size=10, angle=90, margin=margin(5, b = 10)),
+
+    #title and caption text adjustments
+    plot.title       = element_text(family = font_2,size = 10,face = 'italic',hjust = 0,vjust = 2),               
+    plot.subtitle    = element_text(family = font_2,size = 10,face = 'bold',hjust = 0,vjust = 2),                 
+    plot.caption     = element_text(family = font_2,size = 10,face = 'bold',hjust = 0,vjust = 2)               
+    )
+}
+
+
+#good theme
+theme_good <- function(){ 
+    
+  #fonts   
+  #defaults on Windows: serif, sans, or mono
+  font_1 <- "mono" 
+  font_2 <- "sans"
+  
+  #color palette
+  col_1 <- "#FFFFFF"
+  col_2 <- "#000000"
+  col_3 <- "#cccccc"
+  col_4 <- "#777777"
+  col_5 <- "#029af2"
+
+  #the base theme being adjusted
+  #AKA the starting point
+  theme_minimal() %+replace%    
+    
+  theme(
+    #background color
+    panel.background = element_blank(),
+    
+    #background grid lines
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(), 
+    
+    #axis text adjustments
+    axis.text.x      = element_text(family="", face="plain", color=col_4, size=8, angle=0),
+    axis.text.y      = element_text(family="", face="plain", color=col_4, size=8, angle=0),
+    axis.title.x     = element_text(family="", face="plain",  color=col_2, size=10,angle=0,margin=margin(t = 3)),
+    axis.title.y     = element_text(family="", face="plain",  color=col_2, size=10,angle=90,margin=margin(r = 3)),
+
+    #title and caption text adjustments
+    plot.title       = element_text(family = font_2,size = 10,face = 'bold',hjust = 0,vjust = 2),               
+    plot.subtitle    = element_text(family = font_2,size = 8,face = 'italic',hjust = 0,vjust = 2),                 
+    plot.caption     = element_text(family = font_2,size = 6, face = 'plain',hjust = 0,vjust = 2), 
+    
+    #axis lines
+    axis.line.y.left = element_line(linetype = "solid",color = col_3,linewidth = 0.5)
+    
+    ) 
+}
+
+```
+
+## Applying the custom themes
+
+For this demonstration, I'm using the `gridExtra` library which allows plots to be arranged with a bit more sophistication.Not all plot elements are used (*e.g.* plot title).
+
+```{r}
+p1a<-plot_barchart 
+p1b<-plot_barchart + theme_bad()
+p1c<-plot_barchart + theme_good()
+
+p2a<-plot_boxplots
+p2b<-plot_boxplots + theme_bad()
+p2c<-plot_boxplots + theme_good()
+
+grid.arrange(p1a,p1b,p1c,p2a,p2b,p2c,ncol=3)
+```
