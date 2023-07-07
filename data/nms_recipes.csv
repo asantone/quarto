@@ -1,0 +1,309 @@
+Output,Qty,Value,Input 1,Qty,Input 2,Qty,Input 3,Qty
+Nanite Cluster,15,20 (300),Salvaged Data,1,,,,
+Gold,100,353 (35300),Living Pearl,1,,,,
+Living Slime,50,20 (1000),Hypnotic Eye,1,,,,
+Nanite Cluster,50,20 (1000),Hadal Core,1,,,,
+Sodium Nitrate,50,82 (4100),Crystal Sulphide,1,,,,
+Nanite Cluster,50,20 (1000),Larval Core,1,,,,
+Condensed Carbon,1,24 (24),Cyto-Phosphate,1,,,,
+Gold,1,353 (353),Hexite,1,,,,
+Glass,1,200 (200),Frost Crystal,40,,,,
+Pyrite,1,62 (62),Gold,1,,,,
+Nanite Cluster,1,20 (20),Platinum,35,,,,
+Nanite Cluster,1,20 (20),Pugneum,25,,,,
+Faecium,1,30 (30),Mordite,3,,,,
+Carbon,1,12 (12),Oxygen,1,,,,
+Di-hydrogen Jelly,1,200 (200),Di-hydrogen,30,,,,
+Di-hydrogen,40,34 (1360),Di-hydrogen Jelly,1,,,,
+Ionised Cobalt,1,162 (162),Cobalt,2,,,,
+Cobalt,2,76 (152),Ionised Cobalt,1,,,,
+Carbon,2,12 (24),Condensed Carbon,1,,,,
+Condensed Carbon,1,24 (24),Carbon,2,,,,
+Sodium Nitrate,1,82 (82),Sodium,2,,,,
+Sodium,2,41 (82),Sodium Nitrate,1,,,,
+Pure Ferrite,1,28 (28),Ferrite Dust,1,,,,
+Magnetised Ferrite,1,82 (82),Pure Ferrite,2,,,,
+Pure Ferrite,2,28 (56),Magnetised Ferrite,1,,,,
+Chromatic Metal,1,88 (88),Cadmium,1,,,,
+Chromatic Metal,4,88 (352),Indium,2,,,,
+Chromatic Metal,3,88 (264),Emeril,2,,,,
+Chromatic Metal,1,88 (88),Copper,2,,,,
+Chromatic Metal,2,88 (176),Activated Cadmium,1,,,,
+Chromatic Metal,4,88 (352),Activated Indium,1,,,,
+Chromatic Metal,3,88 (264),Activated Emeril,1,,,,
+Chromatic Metal,1,88 (88),Activated Copper,1,,,,
+Ferrite Dust,1,14 (14),Paraffinium,1,,,,
+Ferrite Dust,1,14 (14),Pyrite,1,,,,
+Ferrite Dust,1,14 (14),Ammonia,1,,,,
+Ferrite Dust,1,14 (14),Uranium,1,,,,
+Ferrite Dust,1,14 (14),Dioxite,1,,,,
+Ferrite Dust,1,14 (14),Phosphorus,1,,,,
+Chlorine,1,205 (205),Salt,2,,,,
+Salt,2,101 (202),Chlorine,1,,,,
+Radon,1,20 (20),Sulphurine,3,,,,
+Nitrogen,1,20 (20),Radon,3,,,,
+Sulphurine,1,20 (20),Nitrogen,3,,,,
+Viscous Fluids,1,20 (20),Residual Goop,1,,,,
+Nanite Cluster,1,20 (20),Runaway Mould,5,,,,
+Ferrite Dust,2,14 (28),Rusted Metal,1,,,,
+Runaway Mould,1,20 (20),Living Slime,1,,,,
+Living Slime,1,20 (20),Viscous Fluids,1,,,,
+Di-hydrogen,1,34 (34),Tritium,5,,,,
+Carbon,2,12 (24),Fungal Mould,1,,,,
+Carbon,2,12 (24),Gamma Root,1,,,,
+Carbon,2,12 (24),Cactus Flesh,1,,,,
+Carbon,2,12 (24),Solanium,1,,,,
+Carbon,2,12 (24),Star Bulb,1,,,,
+Sodium,1,41 (41),Marrow Bulb,1,,,,
+Oxygen,1,34 (34),Kelp Sac,1,,,,
+Mordite,2,40 (80),Faecium,3,,,,
+Silver,250,186 (46500),Aronium,1,,,,
+Silver,250,186 (46500),Dirty Bronze,1,,,,
+Silver,250,186 (46500),Herox,1,,,,
+Gold,125,353 (44125),Lemmium,1,,,,
+Gold,125,353 (44125),Magno-Gold,1,,,,
+Gold,125,353 (44125),Grantine,1,,,,
+Platinum,250,505 (126250),Geodesite,1,,,,
+Platinum,250,505 (126250),Iridesite,1,,,,
+Glass,1,200 (200),Cyto-Phosphate,50,Salt,50,,
+Nanite Cluster,1,20 (20),Faecium,1,Hexite,1,,
+Gold,1,353 (353),Faecium,1,Residual Goop,1,,
+Platinum,1,505 (505),Gold,1,Silver,1,,
+Condensed Carbon,2,24 (48),Uranium,1,Di-hydrogen,1,,
+Solanium,1,70 (70),Sulphurine,1,Di-hydrogen,1,,
+Uranium,1,62 (62),Radon,1,Di-hydrogen,1,,
+Ammonia,1,62 (62),Nitrogen,1,Di-hydrogen,1,,
+Salt,1,101 (101),Di-hydrogen,1,Oxygen,1,,
+Faecium,1,30 (30),Di-hydrogen,1,Carbon,1,,
+Mordite,1,40 (40),Di-hydrogen,1,Condensed Carbon,1,,
+Magnetised Ferrite,1,82 (82),Ferrite Dust,1,Carbon,1,,
+Magnetised Ferrite,2,82 (164),Ferrite Dust,1,Condensed Carbon,1,,
+Magnetised Ferrite,2,82 (164),Pure Ferrite,1,Carbon,1,,
+Magnetised Ferrite,3,82 (246),Pure Ferrite,1,Condensed Carbon,1,,
+Deuterium,1,34 (34),Di-hydrogen,1,Tritium,1,,
+Rusted Metal,2,20 (40),Pure Ferrite,1,Oxygen,1,,
+Rusted Metal,1,20 (20),Ferrite Dust,1,Oxygen,1,,
+Condensed Carbon,5,24 (120),Carbon,2,Oxygen,2,,
+Condensed Carbon,6,24 (144),Condensed Carbon,1,Oxygen,2,,
+Sodium Nitrate,1,82 (82),Sodium,1,Oxygen,1,,
+Sodium Nitrate,2,82 (164),Sodium Nitrate,1,Oxygen,1,,
+Sodium Nitrate,1,82 (82),Carbon,1,Sodium,1,,
+Sodium Nitrate,2,82 (164),Condensed Carbon,1,Sodium,1,,
+Dioxite,1,62 (62),Carbon,1,Sodium Nitrate,1,,
+Dioxite,2,62 (124),Condensed Carbon,1,Sodium Nitrate,1,,
+Mordite,1,40 (40),Carbon,1,Pugneum,1,,
+Mordite,2,40 (80),Condensed Carbon,1,Pugneum,1,,
+Sodium Nitrate,1,82 (82),Sodium,1,Pugneum,1,,
+Sodium Nitrate,3,82 (246),Sodium Nitrate,1,Pugneum,1,,
+Faecium,3,30 (90),Carbon,2,Mordite,1,,
+Faecium,4,30 (120),Condensed Carbon,1,Mordite,1,,
+Marrow Bulb,3,41 (123),Sodium,2,Mordite,1,,
+Marrow Bulb,4,41 (164),Sodium Nitrate,1,Mordite,1,,
+Pure Ferrite,3,28 (84),Ferrite Dust,2,Pugneum,1,,
+Magnetised Ferrite,3,82 (246),Pure Ferrite,2,Pugneum,1,,
+Magnetised Ferrite,4,82 (328),Magnetised Ferrite,3,Pugneum,1,,
+Cadmium,2,83 (166),Cadmium,1,Chromatic Metal,1,,
+Indium,2,132 (264),Indium,1,Chromatic Metal,1,,
+Emeril,2,114 (228),Emeril,1,Chromatic Metal,1,,
+Copper,2,41 (82),Copper,1,Chromatic Metal,1,,
+Star Bulb,2,32 (64),Paraffinium,1,Star Bulb,1,,
+Cactus Flesh,2,28 (56),Pyrite,1,Cactus Flesh,1,,
+Fungal Mould,2,16 (32),Ammonia,1,Fungal Mould,1,,
+Gamma Root,2,16 (32),Uranium,1,Gamma Root,1,,
+Frost Crystal,2,12 (24),Dioxite,1,Frost Crystal,1,,
+Solanium,2,70 (140),Phosphorus,1,Solanium,1,,
+Chlorine,5,205 (1025),Salt,2,Oxygen,2,,
+Chlorine,6,205 (1230),Chlorine,1,Oxygen,2,,
+Ionised Cobalt,5,162 (810),Cobalt,2,Oxygen,2,,
+Ionised Cobalt,6,162 (972),Ionised Cobalt,1,Oxygen,2,,
+Gold,1,353 (353),Mordite,1,Pugneum,1,,
+Paraffinium,2,62 (124),Silver,1,Oxygen,1,,
+Pyrite,2,62 (124),Gold,1,Oxygen,1,,
+Magnetised Ferrite,10,82 (820),Platinum,1,Oxygen,1,,
+Radon,1,20 (20),Sulphurine,1,Oxygen,1,,
+Nitrogen,1,20 (20),Radon,1,Oxygen,1,,
+Sulphurine,1,20 (20),Nitrogen,1,Oxygen,1,,
+Radon,1,20 (20),Sulphurine,1,Chromatic Metal,1,,
+Nitrogen,1,20 (20),Radon,1,Chromatic Metal,1,,
+Sulphurine,1,20 (20),Nitrogen,1,Chromatic Metal,1,,
+Sodium Nitrate,1,82 (82),Nitrogen,1,Sodium,1,,
+Sodium Nitrate,2,82 (164),Nitrogen,1,Sodium Nitrate,1,,
+Ionised Cobalt,2,162 (324),Marrow Bulb,1,Oxygen,1,,
+Chlorine,2,205 (410),Kelp Sac,1,Oxygen,1,,
+Faecium,3,30 (90),Faecium,1,Oxygen,1,,
+Ionised Cobalt,2,162 (324),Marrow Bulb,1,Pugneum,1,,
+Chlorine,2,205 (410),Kelp Sac,1,Pugneum,1,,
+Sodium,2,41 (82),Marrow Bulb,1,Carbon,1,,
+Oxygen,2,34 (68),Kelp Sac,1,Carbon,1,,
+Condensed Carbon,2,24 (48),Faecium,1,Carbon,2,,
+Sodium Nitrate,2,82 (164),Marrow Bulb,1,Sodium,1,,
+Sodium Nitrate,2,82 (164),Kelp Sac,1,Sodium,1,,
+Sodium Nitrate,2,82 (164),Faecium,1,Sodium,1,,
+Sodium,2,41 (82),Marrow Bulb,1,Condensed Carbon,1,,
+Oxygen,2,34 (68),Kelp Sac,1,Condensed Carbon,1,,
+Condensed Carbon,3,24 (72),Faecium,1,Condensed Carbon,1,,
+Sodium Nitrate,2,82 (164),Marrow Bulb,1,Sodium Nitrate,1,,
+Sodium Nitrate,2,82 (164),Kelp Sac,1,Sodium Nitrate,1,,
+Sodium Nitrate,2,82 (164),Faecium,1,Sodium Nitrate,1,,
+Ionised Cobalt,2,162 (324),Marrow Bulb,1,Cobalt,1,,
+Chlorine,2,205 (410),Kelp Sac,1,Salt,1,,
+Ionised Cobalt,2,162 (324),Marrow Bulb,1,Ionised Cobalt,1,,
+Chlorine,2,205 (410),Kelp Sac,1,Chlorine,1,,
+Gold,2,353 (706),Faecium,1,Pugneum,1,,
+Condensed Carbon,2,24 (48),Faecium,1,Mordite,1,,
+Magnetised Ferrite,4,82 (328),Indium,1,Ferrite Dust,1,,
+Magnetised Ferrite,2,82 (164),Cadmium,1,Ferrite Dust,1,,
+Magnetised Ferrite,3,82 (246),Emeril,1,Ferrite Dust,1,,
+Magnetised Ferrite,1,82 (82),Copper,1,Ferrite Dust,1,,
+Chromatic Metal,2,88 (176),Cadmium,1,Pure Ferrite,1,,
+Chromatic Metal,3,88 (264),Emeril,1,Pure Ferrite,1,,
+Chromatic Metal,1,88 (88),Copper,1,Pure Ferrite,1,,
+Chromatic Metal,4,88 (352),Indium,1,Pure Ferrite,1,,
+Magnetised Ferrite,4,82 (328),Activated Cadmium,1,Ferrite Dust,1,,
+Magnetised Ferrite,8,82 (656),Activated Indium,1,Ferrite Dust,1,,
+Magnetised Ferrite,6,82 (492),Activated Emeril,1,Ferrite Dust,1,,
+Magnetised Ferrite,2,82 (164),Activated Copper,1,Ferrite Dust,1,,
+Chromatic Metal,4,88 (352),Activated Cadmium,1,Pure Ferrite,1,,
+Chromatic Metal,8,88 (704),Activated Indium,1,Pure Ferrite,1,,
+Chromatic Metal,6,88 (528),Activated Emeril,1,Pure Ferrite,1,,
+Chromatic Metal,2,88 (176),Activated Copper,1,Pure Ferrite,1,,
+Star Bulb,1,32 (32),Paraffinium,2,Oxygen,1,,
+Cactus Flesh,1,28 (28),Pyrite,2,Oxygen,1,,
+Fungal Mould,1,16 (16),Ammonia,2,Oxygen,1,,
+Gamma Root,1,16 (16),Uranium,2,Oxygen,1,,
+Frost Crystal,1,12 (12),Dioxite,2,Oxygen,1,,
+Solanium,1,70 (70),Phosphorus,2,Oxygen,1,,
+Ammonia,1,62 (62),Paraffinium,2,Ferrite Dust,1,,
+Paraffinium,1,62 (62),Pyrite,2,Ferrite Dust,1,,
+Dioxite,1,62 (62),Ammonia,2,Ferrite Dust,1,,
+Pyrite,1,62 (62),Uranium,2,Ferrite Dust,1,,
+Phosphorus,1,62 (62),Dioxite,2,Ferrite Dust,1,,
+Uranium,1,62 (62),Phosphorus,2,Ferrite Dust,1,,
+Ammonia,1,62 (62),Paraffinium,2,Pure Ferrite,1,,
+Paraffinium,1,62 (62),Pyrite,2,Pure Ferrite,1,,
+Dioxite,1,62 (62),Ammonia,2,Pure Ferrite,1,,
+Pyrite,1,62 (62),Uranium,2,Pure Ferrite,1,,
+Phosphorus,1,62 (62),Dioxite,2,Pure Ferrite,1,,
+Uranium,1,62 (62),Phosphorus,2,Pure Ferrite,1,,
+Ammonia,1,62 (62),Fungal Mould,2,Salt,1,,
+Dioxite,1,62 (62),Frost Crystal,2,Salt,1,,
+Uranium,1,62 (62),Gamma Root,2,Salt,1,,
+Pyrite,1,62 (62),Cactus Flesh,2,Salt,1,,
+Phosphorus,1,62 (62),Solanium,2,Salt,1,,
+Paraffinium,1,62 (62),Star Bulb,2,Salt,1,,
+Paraffinium,1,62 (62),Sulphurine,1,Ferrite Dust,1,,
+Uranium,1,62 (62),Ferrite Dust,1,Radon,1,,
+Sodium Nitrate,1,82 (82),Nitrogen,1,Ferrite Dust,1,,
+Paraffinium,2,62 (124),Sulphurine,1,Pure Ferrite,1,,
+Uranium,2,62 (124),Radon,1,Pure Ferrite,1,,
+Sodium Nitrate,2,82 (164),Nitrogen,1,Pure Ferrite,1,,
+Paraffinium,3,62 (186),Sulphurine,1,Magnetised Ferrite,1,,
+Uranium,3,62 (186),Radon,1,Magnetised Ferrite,1,,
+Sodium Nitrate,3,82 (246),Nitrogen,1,Magnetised Ferrite,1,,
+Fungal Mould,1,16 (16),Ammonia,1,Nitrogen,1,,
+Frost Crystal,1,12 (12),Dioxite,1,Radon,1,,
+Gamma Root,1,16 (16),Uranium,1,Radon,1,,
+Cactus Flesh,1,28 (28),Pyrite,1,Sulphurine,1,,
+Solanium,1,70 (70),Phosphorus,1,Sulphurine,1,,
+Star Bulb,1,32 (32),Paraffinium,1,Nitrogen,1,,
+Marrow Bulb,1,41 (41),Cobalt,1,Nitrogen,1,,
+Kelp Sac,1,41 (41),Salt,1,Nitrogen,1,,
+Faecium,1,30 (30),Sulphurine,1,Nitrogen,1,,
+Nanite Cluster,1,20 (20),Silver,15,Gold,15,Platinum,25
+Magnetised Ferrite,5,82 (410),Ferrite Dust,1,Pure Ferrite,1,Silver,1
+Magnetised Ferrite,8,82 (656),Ferrite Dust,1,Pure Ferrite,1,Gold,1
+Magnetised Ferrite,12,82 (984),Ferrite Dust,1,Pure Ferrite,1,Platinum,1
+Oxygen,10,34 (340),Fungal Mould,1,Kelp Sac,1,Condensed Carbon,1
+Oxygen,10,34 (340),Frost Crystal,1,Kelp Sac,1,Condensed Carbon,1
+Oxygen,10,34 (340),Cactus Flesh,1,Kelp Sac,1,Condensed Carbon,1
+Oxygen,10,34 (340),Solanium,1,Kelp Sac,1,Condensed Carbon,1
+Oxygen,10,34 (340),Gamma Root,1,Kelp Sac,1,Condensed Carbon,1
+Oxygen,10,34 (340),Star Bulb,1,Kelp Sac,1,Condensed Carbon,1
+Chromatic Metal,5,88 (440),Silver,1,Gold,1,Copper,1
+Chromatic Metal,10,88 (880),Silver,1,Gold,1,Cadmium,1
+Chromatic Metal,20,88 (1760),Silver,1,Gold,1,Emeril,1
+Chromatic Metal,30,88 (2640),Silver,1,Gold,1,Indium,1
+Gold,10,353 (3530),Ferrite Dust,1,Oxygen,1,Emeril,1
+Platinum,10,505 (5050),Ferrite Dust,1,Oxygen,1,Chromatic Metal,250
+Warp Cell,1,46750 (46750),Condensed Carbon,25,Sodium,10,Chromatic Metal,250
+Warp Cell,1,46750 (46750),Carbon,50,Sodium Nitrate,5,Chromatic Metal,250
+Warp Cell,1,46750 (46750),Condensed Carbon,25,Sodium Nitrate,5,Chromatic Metal,250
+Unstable Plasma,1,5750 (5750),Oxygen,10,Ferrite Dust,20,Carbon,20
+Unstable Plasma,1,5750 (5750),Oxygen,10,Ferrite Dust,20,Condensed Carbon,10
+Unstable Plasma,1,5750 (5750),Oxygen,10,Pure Ferrite,20,Carbon,20
+Unstable Plasma,1,5750 (5750),Oxygen,10,Condensed Carbon,10,Pure Ferrite,20
+Life Support Gel,1,200 (200),Oxygen,10,Condensed Carbon,10,Di-hydrogen,10
+Starship Launch Fuel,1,450 (450),Di-hydrogen,10,Ferrite Dust,20,Sodium Nitrate,5
+Starship Launch Fuel,1,450 (450),Di-hydrogen,10,Pure Ferrite,20,Sodium,10
+Starship Launch Fuel,1,450 (450),Di-hydrogen,10,Magnetised Ferrite,10,Sodium Nitrate,5
+Ion Battery,1,200 (200),Ferrite Dust,10,Silver,10,Sodium,10
+Aronium,1,25000 (25000),Paraffinium,30,Cobalt,60,Tritium,20
+Aronium,1,25000 (25000),Paraffinium,30,Ionised Cobalt,30,Tritium,20
+Aronium,1,25000 (25000),Paraffinium,30,Cobalt,60,Silver,20
+Aronium,1,25000 (25000),Paraffinium,30,Ionised Cobalt,30,Silver,20
+Aronium,1,25000 (25000),Paraffinium,30,Cobalt,60,Gold,10
+Aronium,1,25000 (25000),Paraffinium,30,Ionised Cobalt,30,Gold,10
+Aronium,1,25000 (25000),Paraffinium,30,Cobalt,60,Platinum,5
+Aronium,1,25000 (25000),Paraffinium,30,Ionised Cobalt,30,Platinum,5
+Dirty Bronze,1,25000 (25000),Pyrite,30,Ferrite Dust,120,Tritium,20
+Dirty Bronze,1,25000 (25000),Pyrite,30,Pure Ferrite,60,Tritium,20
+Dirty Bronze,1,25000 (25000),Pyrite,30,Ferrite Dust,120,Silver,20
+Dirty Bronze,1,25000 (25000),Pyrite,30,Pure Ferrite,60,Silver,20
+Dirty Bronze,1,25000 (25000),Pyrite,30,Ferrite Dust,120,Gold,10
+Dirty Bronze,1,25000 (25000),Pyrite,30,Pure Ferrite,60,Gold,10
+Dirty Bronze,1,25000 (25000),Pyrite,30,Ferrite Dust,120,Platinum,5
+Dirty Bronze,1,25000 (25000),Pyrite,30,Pure Ferrite,60,Platinum,5
+Herox,1,25000 (25000),Ammonia,30,Cobalt,60,Tritium,20
+Herox,1,25000 (25000),Ammonia,30,Ionised Cobalt,30,Tritium,20
+Herox,1,25000 (25000),Ammonia,30,Cobalt,60,Silver,20
+Herox,1,25000 (25000),Ammonia,30,Ionised Cobalt,30,Silver,20
+Herox,1,25000 (25000),Ammonia,30,Cobalt,60,Gold,10
+Herox,1,25000 (25000),Ammonia,30,Ionised Cobalt,30,Gold,10
+Herox,1,25000 (25000),Ammonia,30,Cobalt,60,Platinum,5
+Herox,1,25000 (25000),Ammonia,30,Ionised Cobalt,30,Platinum,5
+Lemmium,1,25000 (25000),Uranium,30,Ferrite Dust,120,Tritium,20
+Lemmium,1,25000 (25000),Uranium,30,Pure Ferrite,60,Tritium,20
+Lemmium,1,25000 (25000),Uranium,30,Ferrite Dust,120,Silver,20
+Lemmium,1,25000 (25000),Uranium,30,Pure Ferrite,60,Silver,20
+Lemmium,1,25000 (25000),Uranium,30,Ferrite Dust,120,Gold,10
+Lemmium,1,25000 (25000),Uranium,30,Pure Ferrite,60,Gold,10
+Lemmium,1,25000 (25000),Uranium,30,Ferrite Dust,120,Platinum,5
+Lemmium,1,25000 (25000),Uranium,30,Pure Ferrite,60,Platinum,5
+Magno-Gold,1,25000 (25000),Phosphorus,30,Cobalt,60,Tritium,20
+Magno-Gold,1,25000 (25000),Phosphorus,30,Ionised Cobalt,30,Tritium,20
+Magno-Gold,1,25000 (25000),Phosphorus,30,Cobalt,60,Silver,20
+Magno-Gold,1,25000 (25000),Phosphorus,30,Ionised Cobalt,30,Silver,20
+Magno-Gold,1,25000 (25000),Phosphorus,30,Cobalt,60,Gold,10
+Magno-Gold,1,25000 (25000),Phosphorus,30,Ionised Cobalt,30,Gold,10
+Magno-Gold,1,25000 (25000),Phosphorus,30,Cobalt,60,Platinum,5
+Magno-Gold,1,25000 (25000),Phosphorus,30,Ionised Cobalt,30,Platinum,5
+Grantine,1,25000 (25000),Dioxite,30,Cobalt,60,Tritium,20
+Grantine,1,25000 (25000),Dioxite,30,Ionised Cobalt,30,Tritium,20
+Grantine,1,25000 (25000),Dioxite,30,Cobalt,60,Silver,20
+Grantine,1,25000 (25000),Dioxite,30,Ionised Cobalt,30,Silver,20
+Grantine,1,25000 (25000),Dioxite,30,Cobalt,60,Gold,10
+Grantine,1,25000 (25000),Dioxite,30,Ionised Cobalt,30,Gold,10
+Grantine,1,25000 (25000),Dioxite,30,Cobalt,60,Platinum,5
+Grantine,1,25000 (25000),Dioxite,30,Ionised Cobalt,30,Platinum,5
+Thermic Condensate,1,50000 (50000),Sulphurine,100,Carbon,20,Salt,10
+Enriched Carbon,1,50000 (50000),Radon,100,Carbon,20,Salt,10
+Nitrogen Salt,1,50000 (50000),Nitrogen,100,Carbon,20,Salt,10
+Thermic Condensate,1,50000 (50000),Sulphurine,100,Condensed Carbon,10,Salt,10
+Enriched Carbon,1,50000 (50000),Radon,100,Condensed Carbon,10,Salt,10
+Nitrogen Salt,1,50000 (50000),Nitrogen,100,Condensed Carbon,10,Salt,10
+Thermic Condensate,1,50000 (50000),Sulphurine,100,Carbon,20,Chlorine,5
+Enriched Carbon,1,50000 (50000),Radon,100,Carbon,20,Chlorine,5
+Nitrogen Salt,1,50000 (50000),Nitrogen,100,Carbon,20,Chlorine,5
+Thermic Condensate,1,50000 (50000),Sulphurine,100,Condensed Carbon,10,Chlorine,5
+Enriched Carbon,1,50000 (50000),Radon,100,Condensed Carbon,10,Chlorine,5
+Nitrogen Salt,1,50000 (50000),Nitrogen,100,Condensed Carbon,10,Chlorine,5
+Glass,1,200 (200),Silicate Powder,40,,,,
+Nanite Cluster,2,20 (40),Tainted Metal,1,,,,
+Residual Goop,1,20 (20),Cursed Dust,2,,,,
+Nanite Cluster,50,20 (1000),Vile Spawn,1,,,,
+Nanite Cluster,50,20 (1000),Flesh Rope,1,,,,
+Nanite Cluster,50,20 (1000),Radiant Shard,1,,,,
+Nanite Cluster,95,20 (1900),Inverted Mirror,1,,,,
+Nanite Cluster,230,20 (4600),Hyaline Brain,1,,,,
+Pugneum,2,138 (276),Atlantideum,1,,,,
+Runaway Mould,3,20 (60),Atlantideum,1,Pugneum,1,,

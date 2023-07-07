@@ -1,0 +1,247 @@
+---
+title: "Network Graph"
+format:
+  html:
+    code-fold: true
+    code-summary: "CODE"
+---
+# Part 1: Network Graphs and simpleNetwork
+
+## Premise
+
+Network graphs are great for demonstrating the relationships between items. This could be a food web showing how organisms transfer energy, a diagram of how a business team communicates and shares information, or in this case how various items are crafted from components in a video game. This method isn't necessarily good for analysis but it's a great way to visualize these relationships and it can help you perhaps discover patterns that weren't readily apparent.   
+
+## Network Diagrams
+These data visualizations contain elements called `nodes` and `edges` where the nodes are typically circles and the edges or connections are typically lines or perhaps arrows. If your graph contains arrows, it's called a directed graph because it indicates the flow of information in a particular direction. This could be something like a bacteriophage attacking a bacterium or an employee reporting up to a boss or perhaps a distributor providing goods to a vendor. 
+
+## Data
+
+In this example, I'm using [a dataset](https://www.xainesworld.com/all-refiner-recipes-in-no-mans-sky/) of craftable recipes from the game [No Man's Sky](https://www.nomanssky.com/) from [Hello Games](https://hellogames.org/). The data table describes how various ingredients are combined to generate other items as output. 
+
+To get the data, I used the `IMPORTHTML` function in the first cell of a spreadsheet in Google Sheets to grab the data from the page:
+
+`=IMPORTHTML("https://www.xainesworld.com/all-refiner-recipes-in-no-mans-sky/","table",1)`
+
+Then, I exported that sheet as a `.csv` file. 
+
+## Setup
+
+First I load a few libraries to help. Many of these are from the `tidyverse` collection and a few others are specifically for the network diagram itself. Specifically, the [networkD3](https://rdrr.io/cran/networkD3/src/inst/examples/examples.R) library will be used for generating the diagram. 
+
+```{r, output=FALSE, warning=FALSE}
+#data manipulation
+library(readr)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(stringr)
+library(data.table)
+
+#network graphing and saving
+library(networkD3)
+library(htmlwidgets)
+```
+
+Next, I load the dataset from a `.csv` file. 
+```{r, message=FALSE}
+#read in the original dataset and preview it
+main<-read_csv("data/nms_recipes.csv")
+
+#result
+main
+```
+
+Then, I select specific columns because I don't want need all of the information for the diagram.  
+```{r}
+#select certain columns 
+selected <- main %>% 
+            select(c("Output", "Input 1", "Input 2", "Input 3")) %>% 
+            rename(output = "Output", input_1 = "Input 1", input_2 = "Input 2", input_3 = "Input 3")
+
+#result
+selected
+```
+
+Here, I want to think about my diagram a bit. Some of these recipes are for individual items that are also themselves used as components in other recipes. So what I want to do now is create recipe groups by generating new nodes using the base ingredient names and an index value. So, recipe 1, recipe 2, etc. The `str_c` function is used to concatenate the information from two columns with an underscore between the data. The `mutate` function is again used to create the new column. 
+
+```{r}
+#add an indexed id column to indicate each unique recipe
+mutated <- selected %>% mutate(id=str_c(selected$output,"_",rowid(output)))
+
+#result
+mutated
+```
+
+Now I'm going to split my data so I can do a couple of things with it. First, I get distinct combinations of the `output` and `id` columns which contain the base elements and the unique recipe identifiers, respectively. Then, I add the string `_recipes` to the base elements. This sets up the top-level node labels. I want all of the unique recipes to connect up to a main node for that type of recipe. You might think of this like a top-level director over all the regional directors in a business context. I'm doing this to add some organization to the graph even though it doesn't exist in the original data. 
+```{r}
+#get unique to-from pairs, sort, rename columns as to and from
+df_1 <- mutated %>% 
+        distinct(output, id) %>% 
+        arrange(output) %>% 
+        rename(to=output, from=id)
+
+#tack on "recipes" to the top-level node for each group
+df_1$to <- paste(df_1$to, "recipes", sep="_")
+
+#result
+df_1
+```
+
+Next, I take the specific recipes and all the input lists of ingredients and transform the arrangement by pivoting the "wide" data to a "long" format. You can read more about it in the `pivot_longer` [documentation](https://tidyr.tidyverse.org/reference/pivot_longer.html). 
+```{r}
+#there is a lot going on here:
+#select everything except the output column (so, id and three ingredient lists)
+#use pivot_longer to rearrange the ingredient data (ignoring the id column) into a type and input column
+#drop the type column because it's not needed
+#drop any NA values
+#rename the remaining id and input lists as to and from
+df_2 <- mutated %>% 
+        select(!output) %>% 
+        pivot_longer(!id, names_to="type",values_to="input") %>% 
+        select(!type) %>% 
+        drop_na() %>% 
+        rename(to=id, from=input)
+
+#result
+df_2
+```
+
+Now that I sorted the relationships of the top-level nodes, the specific recipes, and the ingredients, I can stack the two datasets since they both contain only two columns named `to` and `from`. I'll use `bind_rows` ([documentation](https://dplyr.tidyverse.org/reference/bind.html)) from dplyr. 
+```{r}
+#stack the two to-from pair datasets using bind_rows
+#they need to have the same column names
+data<-bind_rows(df_1, df_2)
+
+#result
+data
+```
+
+Finally, we can use the simple to-from formatted data to generate a network diagram with the `simpleNetwork` function from `networkD3`. You'll notice that this graph is a bit difficult to read in part due to the lack of color groups. This is where the increased control of the `forceNetwork` function is useful and that's where Part 2 picks up. 
+```{r}
+# Plot
+p <- simpleNetwork(data,                   # data source 
+                   height="",              # output height
+                   width="",               # output width
+                   Source = 2,             # source column number ("from")
+                   Target = 1,             # target column number ("to")
+                   linkDistance = 4,       # distance between nodes
+                   charge = -300,          # force affecting the nodes (repulsion (-) or attraction (+))
+                   fontSize = 14,          # node label font size
+                   fontFamily = "serif",   # node label font family
+                   linkColour = "#cccccc", # edge color (applies to all edges)
+                   nodeColour = "#22a1ab", # node color (applies to all edges)
+                   opacity = 0.8,          # node opacity (0 to 1)
+                   zoom = TRUE             # zoom allowed or not
+)
+
+#result
+p
+```
+
+
+# Part 2: forceNetwork and more control
+
+In part one, you learned how to use simple to-from data pairs to generate a simple network diagram. In this next part, you'll see how to generate a more sophisticated diagram which uses two-part data as input. That complicates things a bit but ultimately offers more control over the appearance of the diagram. 
+
+
+First, I create a vector containing all unique elements of the to-from data. Note that they are being converted to factors.   
+```{r}
+#generate a vector of all unique elements in the list of to and from elements
+#convert it to a factor
+#store it in a tibble
+nodes <- tibble(name = factor(sort(unique(c(data$to, data$from)))))
+nodes
+```
+Next, I split the data so I can do group assignment. Any item with an underscore (top-level nodes) goes in one pile and everything else (base nodes) goes into the other. The only difference in this code is the use of `!` to say "not". The base elements are first. They will all be grouped together by assigning a group value of 1 and they will eventually receive the same color. 
+
+```{r}
+#logic to reassign group values so each recipe cluster has the same group value
+#subset nodes data to return the base ingredients/items
+#these will all be group 1 (one color)
+nodes_base<-nodes %>% 
+            filter(!grepl('_', name)) %>% 
+            mutate(group = 1, node_size=1)
+nodes_base 
+```
+
+Next I split the top-level nodes containing an underscore in their name. These will be grouped separately and a different color will be applied to each group (including the base elements).
+```{r}
+#logic to get the higher-level clusters
+#these will all be different colors
+
+#filter 'nodes' to only the names with underscores (the clustering groups)
+nodes_clusters<-nodes %>% filter(grepl('_', name)) 
+nodes_clusters
+```
+
+So, here's my logic to get the top-level node groups. First, I grab the first few characters from each string. That is, what letters they start with. It's a unique string for each element and I can use it to group them. Then, I group those mini-strings and add a group identifier as a column. I add one because the base elements will all be in group 1 so these will be group 2, 3, ... *n*. 
+```{r}
+#extract the first few characters from each string and get unique values
+first_chars <- as_tibble(str_sub(nodes_clusters$name,1,5))
+
+#set the group value based on the current group id and *add one* to make these different from the base elements
+first_chars <- first_chars %>% 
+               group_by(value) %>% 
+               mutate(group = cur_group_id()+1)
+first_chars
+```
+
+I add that group value to the nodes information so I now have the node names and their appropriate group identifier. I also use some logic here to style the very highest "recipe" nodes with a large node_size value and give the specific recipe nodes a value that falls between the base elements and the recipe nodes.  
+```{r}
+#differential styling for node sizes
+nodes_clusters <- nodes_clusters %>% 
+                  mutate(group=first_chars$group, node_size=10)
+
+#use an if-else statement and text matching with grep
+#documentation: 
+# The word “grepl” stands for “grep logical”. 
+# The grepl() function in R simply searches for matches in characters or sequences of characters present in a given string.
+# fixed: This is a logical value. If TRUE, then the pattern of the characters or sequence of characters is matched.
+nodes_clusters <- nodes_clusters %>% 
+                  mutate(node_size = if_else(grepl("recipe", name, fixed = TRUE),100,node_size))
+
+nodes_clusters
+
+```
+
+Now I can bind the split data back together and sort based on the name. To recap, all base elements are in group 1 now while all higher-level nodes like specific recipes or recipe groups are all separately grouped by the type of element they generate. This will be the basis of the color styling. 
+```{r}
+#merge nodes_base and nodes_clusters to create group list
+nodes_groups<-bind_rows(nodes_base, nodes_clusters)%>% arrange(name)
+nodes_groups
+```
+
+Now the data must be converted a bit for the two-part input needed for the `forceNetwork` function. According to the [documentation](https://www.rdocumentation.org/packages/networkD3/versions/0.4/topics/forceNetwork), it needs separate dataframes for nodes and links. That is, what is in the network and how is it connected. It also requires that you specify the source (from) and target (to) columns. Compare this to the simpleNetwork which extracts all of that. This function also uses the argument `value` for the edge (line) thickness and `group` to help with style. 
+
+Here, I use the method [suggested by CJ Yetman](https://stackoverflow.com/questions/42324064/directed-graph-using-networkd3-and-a-data-frame) to convert the existing to-from data to numeric values as required by `forceNetwork`. I also add a default value of 1 for the value so all edges will look the same. 
+```{r}
+#convert the existing to-from data so it can be used in the networkD3 graph
+#use 'match' which gives the positions of (first) matches of its first argument in its second.
+to   <- match(data$to, levels(nodes$name))-1 
+from <- match(data$from, levels(nodes$name))-1 
+links<- tibble(to,from,value=1)
+links
+```
+
+Now I can generate the final plot. My links are contained in the `links` tibble while the nodes are described in the `nodes_groups` tibble. There are many groups here and the colors are assigned automatically. I didn't bother trying to create unique colors for each group but that's something that can be done using additional JavaScript to style the nodes. 
+```{r}
+#create the plot
+p<-forceNetwork(Links = links, 
+             Nodes = nodes_groups, 
+             Source = 'from', 
+             Target = 'to', 
+             Value = 'value', 
+             NodeID = 'name', 
+             Group = 'group',
+             Nodesize = 'node_size',
+             charge = -20,
+             zoom=TRUE,
+             opacity=0.8)
+p
+```
+
+You can save the file as its own .html file if you want to keep it separate. 
+```{r}
+#save the output as its own file if you like
+#saveWidget(p, file="nms_recipes_nodegraph.html")
+```
