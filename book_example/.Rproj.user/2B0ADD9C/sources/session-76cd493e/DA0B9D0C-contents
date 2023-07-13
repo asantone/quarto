@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "Quarto Bibliography Notes"
+  author: "Adam Santone"
+  date: "7/13/2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - bibtex_format.qmd
+    - ris_format.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.ris
+csl: apa.csl
+
+format:
+  html:
+    theme: flatly
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

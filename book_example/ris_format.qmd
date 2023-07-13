@@ -1,0 +1,21 @@
+# The RIS Format {.unnumbered}
+
+According to [this page on Wikipedia](https://en.wikipedia.org/wiki/RIS_(file_format)), "RIS is a standardized tag format developed by Research Information Systems, Incorporated (the format name refers to the company) to enable citation programs to exchange data.[1] It is supported by a number of reference managers. Many digital libraries, like IEEE Xplore, Scopus, the ACM Portal, Scopemed, ScienceDirect, SpringerLink, Rayyan, Accordance Bible Software,[2] and online library catalogs can export citations in this format. Citation management applications can export and import citations in this format."
+
+An example of a journal article is given as: 
+```
+TY  - JOUR
+AU  - Shannon, Claude E.
+PY  - 1948
+DA  - July
+TI  - A Mathematical Theory of Communication
+T2  - Bell System Technical Journal
+SP  - 379
+EP  - 423
+VL  - 27
+ER  -
+```
+
+The abbreviations are type (TY), author (AU), publication year (PY), date (DA), primary title (T1), secondary title (T2), starting page (SP), ending page (EP), volume number (VL), and a special "end of reference" (ER) one at the end that is empty to indicate the termination of this entry. There are many other fields available so be sure to read that Wikipedia article for more information. 
+
+

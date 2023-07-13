@@ -1,0 +1,20 @@
+{
+  "index.qmd": {
+    "index.html": "01324135"
+  },
+  "intro.qmd": {
+    "intro.html": "193e5e19"
+  },
+  "summary.qmd": {
+    "summary.html": "be4a60ee"
+  },
+  "references.qmd": {
+    "references.html": "26b35177"
+  },
+  "ris_format.qmd": {
+    "ris_format.html": "17eaa17f"
+  },
+  "bibtex_format.qmd": {
+    "bibtex_format.html": "62f69208"
+  }
+}
