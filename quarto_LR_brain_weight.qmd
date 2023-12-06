@@ -1,0 +1,332 @@
+---
+title: "Linear Regression Lesson Idea: Brain Mass vs Head Volume"
+format: html
+editor: visual
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(mvnormtest)
+```
+
+## Data
+
+Source: [Normal weight of the brain in adults in relation to age, sex, body height and weight](https://pubmed.ncbi.nlm.nih.gov/8072950/)
+
+"Based on more than 8000 autopsies of male and female patients without brain diseases the normal brain weight of adult males and females in relation to sex, age, body-weight, and body-height as well as Body Mass Index were calculated."
+
+Hartmann P, Ramseier A, Gudat F, Mihatsch MJ, Polasek W. Das Normgewicht des Gehirns beim Erwachsenen in Abhängigkeit von Alter, Geschlecht, Körpergrösse und Gewicht [Normal weight of the brain in adults in relation to age, sex, body height and weight]. Pathologe. 1994 Jun;15(3):165-70. German. doi: 10.1007/s002920050040. PMID: 8072950.
+
+## The Plan
+
+Part 1: 
+1. Examine the data
+2. Cleaning and formatting as needed
+3. Exploratory analysis and adjustment as needed
+
+Part 2: 
+4. Model generation
+5. Model quality examination
+
+Part 3: 
+6. Plotting
+7. Plot formatting 
+
+
+## Part 1: Data
+
+The first part of this analysis involves importing and preparing the data for analysis. This requires an examination for any errors, missing data, outliers, and other factors that can violate the assumptions of the intended tests. For this linear regression analysis, the important assumptions are that the data are normally distributed, the variables are linearly related, and the variance of each variable is essentially the same. These will be tested before the model is generated. 
+
+First, import the data and look at the structure. The original data referred to Brain Weight so I used that as the file name. 
+```{r}
+#data notes
+#https://www.kaggle.com/datasets/anubhabswain/brain-weight-in-humans
+#https://pubmed.ncbi.nlm.nih.gov/8072950/
+#gender:       1 represents Male , 2 represents Female
+#age range:    1 represents >18 years of age , 2 represents <18 years of age
+#head volume:  measured in cubic centimeters
+#brain weight: measured in grams
+
+#load data
+main<-read_csv("data/brain_mass.csv")
+
+#preview
+main
+```
+
+I prefer a simple unified lower-case column name so I'll adjust these a bit. 
+```{r}
+#rename columns
+new_names <- c(gender = "Gender", age_range = "Age Range", head_volume = "Head Size(cm^3)", brain_mass = "Brain Weight(grams)")
+main<-rename(main, all_of(new_names))
+main
+```
+
+Some of the factors are not actually factor-types in this tibble so I'll force them into that type.
+```{r}
+#edit types to factors as needed
+main$gender    <- as.factor(main$gender)
+main$age_range <- as.factor(main$age_range)
+main
+```
+
+I don't want to analyze all of the data so I'm restricting this to individuals under the age of 18. That corresponds with the value 2 in the `age_range` variable. 
+```{r}
+#filter data to only age_range 2 (<18)
+#not considering gender 
+#remove any rows that contain missing data
+main<-filter(main, age_range == 2) %>% drop_na()
+main
+```
+
+Let's check the correlation of the variables of interest: head volume and brain 
+```{r}
+#examine correlation
+correlation <- cor(main$head_volume, main$brain_mass)
+round(correlation, digits=4)
+```
+
+```{r}
+#check outliers of each variable of interest
+boxplot(main$head_volume)
+boxplot(main$brain_mass)
+boxplot(main$brain_mass)$out
+```
+
+```{r}
+#remove outliers 
+#remove rows where brain_mass is equal to 1588 and 1620
+
+#get index of the row where the brain_mass is equal to the outlier values
+row_index <- which(main$brain_mass == 1588 | main$brain_mass == 1620)
+
+#filter out the rows with the targeted indices
+main <- main %>% filter(!row_number() %in% row_index)
+
+#preview (note row count is 125 now instead of 127)
+main
+```
+
+```{r}
+#preview plot
+plot(main$head_volume, main$brain_mass)
+```
+
+Let's check for normality using a statistical test. The null hypothesis, or assumption, here is that the data are normally distributed so p-values closer to 1 are desired. 
+```{r}
+#test normality
+shapiro.test(main$head_volume)
+shapiro.test(main$brain_mass)
+```
+
+
+
+```{r}
+#create a linear model
+lm <- lm(brain_mass~head_volume, data = main)
+```
+
+```{r}
+summary(lm)
+```
+
+
+Now we can check for linearity by examining the r-squared value. 
+```{r}
+#check the fit
+r2 = round(summary(lm)$r.squared*100, 2)
+cat("This model explains approximately", r2, "percent of the variation in brain weight due to head volume.")
+```
+
+
+Now we can check for homoscedasticity or the same variance by looking at the residuals plot. 
+```{r}
+#quality check: residuals 
+#should be random/scattered 
+plot(fitted(lm), resid(lm))
+```
+
+```{r}
+#quality check: qq plots
+#data should lie mostly close to or on the line
+qqnorm(resid(lm))
+qqline(resid(lm))
+```
+
+```{r}
+#quality check: density plot
+#curve should approximate a normal distribution
+plot(density(resid(lm)))
+```
+```{r}
+#plot the data with the line of best fit
+plot(main$head_volume,main$brain_mass)
+abline(lm, col = "#0000ff")
+```
+
+```{r}
+#print the model equation
+
+cf<-lm$coefficients
+
+lm_equation  <- paste("y =", 
+                     paste(round(cf[1],2),
+                           paste(round(cf[-1],2),
+                                 "x", 
+                                 sep="", 
+                                 collapse=" + "), 
+                           sep=" + ")
+                     )
+
+lm_equation
+
+```
+
+```{r}
+new_head_volume = tibble(head_volume = c(3216, 3375, 4408))
+
+predict(lm, new_head_volume)
+```
+
+
+## Part 2: Improved Data Visualization
+
+### Preview plot
+```{r}
+plot(main$head_volume,main$brain_mass)
+abline(lm, col = "#0000ff")
+```
+
+### Scatterplot with ggplot2
+```{r}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point()
+```
+
+### Use a minimal theme
+
+This lightens the visual weight of the chart. 
+```{r}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point()+
+  theme_minimal()
+```
+# Remove the grid lines
+
+This removes visual clutter. 
+```{r}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point()+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+```
+
+
+# Rename and rescale the axes
+
+This adds clarity.
+```{r}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point()+
+  scale_x_continuous(limits = c(2700, 4500), breaks = seq(from = 2700, to = 4500, by = 200))+
+  scale_y_continuous(limits = c(800, 1600),  breaks = seq(from = 800, to = 1600, by = 200))+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+```
+# Relabel and resize the axes, titles, and caption.
+
+This improves understanding. A caption is a good place to cite work if needed. 
+```{r}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point()+
+  scale_x_continuous(limits = c(2700, 4500), breaks = seq(from = 2700, to = 4500, by = 200))+
+  scale_y_continuous(limits = c(800, 1600),  breaks = seq(from = 800, to = 1600, by = 200))+
+  labs(title = "Brain mass vs. head volume",
+       subtitle = "Humans, under 18 years",
+       x = bquote("Head Volume "(cm^3)),
+       y = "Brain Mass (g)",
+       caption = "Data source: Kaggle.com")+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.title    = element_text(size=16),
+        plot.subtitle = element_text(size=12),
+        axis.text     = element_text(size=12),
+        axis.title    = element_text(size=14))
+```
+# Add the model line and style the points
+
+This improves visual impact and clarity. Choose a color that is easily visible but matches the intended theme if you need to follow branding guidelines. 
+
+```{r, message=FALSE}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point(color="#888888")+
+  geom_smooth(method="lm", se=FALSE, color="#ff3300")+
+  scale_x_continuous(limits = c(2700, 4500), breaks = seq(from = 2700, to = 4500, by = 200))+
+  scale_y_continuous(limits = c(800, 1600),  breaks = seq(from = 800, to = 1600, by = 200))+
+  labs(title = "Brain mass vs. head volume",
+       subtitle = "Humans, under 18 years",
+       x = bquote("Head Volume "(cm^3)),
+       y = "Brain Mass (g)",
+       caption = "Data source: Kaggle.com")+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.title    = element_text(size=16),
+        plot.subtitle = element_text(size=12),
+        axis.text     = element_text(size=12),
+        axis.title    = element_text(size=14))
+```
+
+# Adjust the aspect ratio
+
+This can improve visual appeal and layout.
+```{r, message = FALSE}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point(color="#888888")+
+  geom_smooth(method="lm", se=FALSE, color="#ff3300")+
+  scale_x_continuous(limits = c(2700, 4500), breaks = seq(from = 2700, to = 4500, by = 200))+
+  scale_y_continuous(limits = c(800, 1600),  breaks = seq(from = 800, to = 1600, by = 200))+
+  labs(title = "Brain mass vs. head volume",
+       subtitle = "Humans, under 18 years",
+       x = bquote("Head Volume "(cm^3)),
+       y = "Brain Mass (g)",
+       caption = "Data source: Kaggle.com")+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.title    = element_text(size=16),
+        plot.subtitle = element_text(size=12),
+        axis.text     = element_text(size=12),
+        axis.title    = element_text(size=14),
+        aspect.ratio=0.3)
+```
+# Add the model 
+
+This can be useful for discussion.
+```{r, message=FALSE}
+ggplot(main, aes(x=head_volume, y=brain_mass))+
+  geom_point(color="#888888")+
+  geom_smooth(method="lm", se=FALSE, color="#ff3300")+
+  scale_x_continuous(limits = c(2700, 4500), breaks = seq(from = 2700, to = 4500, by = 200))+
+  scale_y_continuous(limits = c(800, 1600),  breaks = seq(from = 800, to = 1600, by = 200))+
+  labs(title = "Brain mass vs. head volume",
+       subtitle = "Humans, under 18 years",
+       x = bquote("Head Volume "(cm^3)),
+       y = "Brain Mass (g)",
+       caption = "Data source: Kaggle.com")+
+  theme_minimal()+
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        plot.title    = element_text(size=16),
+        plot.subtitle = element_text(size=12),
+        axis.text     = element_text(size=12),
+        axis.title    = element_text(size=14),
+        aspect.ratio=0.3)+
+  annotate(geom="text", x=4100, y=900, color="#000000", hjust=0, label=lm_equation)
+```
+
+
+

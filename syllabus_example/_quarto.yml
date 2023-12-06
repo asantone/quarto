@@ -1,0 +1,27 @@
+project:
+  type: book
+
+book:
+  downloads: [pdf]
+  title: "Syllabus"
+  author: "Instructor Name"
+  date: "12/6/2023"
+  chapters:
+    - index.qmd
+    - course.qmd
+    - contact.qmd
+    - subject.qmd
+    - policies.qmd
+    - calendar.qmd
+    - grading.qmd
+    - conduct.qmd
+    - mandatory.qmd
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

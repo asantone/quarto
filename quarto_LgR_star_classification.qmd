@@ -1,0 +1,204 @@
+---
+title: "Logistic Regression Lesson Idea: Star Classification"
+format: html
+editor: visual
+---
+
+
+# Data preparation and exploratory analysis
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse) #general purpose; data manipulation (dyplyr); data viz (ggplot2)
+library(caret)     #data splitting
+library(MASS)
+
+#set seed for reproducibility
+set.seed(12345)
+```
+
+```{r}
+#star data
+#source: https://www.kaggle.com/datasets/brsdincer/star-type-classification
+
+#inputs key:
+#Temperature: Temperature(K)
+#L: Relative Luminosity
+#R: Relative Radius
+#A_M: Absolute Magnitude
+#Color: General Obs. Color
+#Spectral_Class: SMASS Spec.
+#Type: Type One-Hot from 0-5
+
+#target key:
+#Red Dwarf - 0
+#Brown Dwarf - 1
+#White Dwarf - 2
+#Main Sequence - 3
+#Super Giants - 4
+#Hyper Giants - 5
+
+#load data
+main<-read_csv("data/Stars.csv")
+
+#rename columns
+new_names <- c(tmp = "Temperature", 
+               lum  = "L", 
+               rad  = "R", 
+               mag = "A_M",
+               col = "Color",
+               spc = "Spectral_Class",
+               typ = "Type")
+main<-rename(main, all_of(new_names))
+#main
+
+#there are 40 of each Type
+#table(main$Type)
+
+#add a binary valued Target column based on Type
+#Types 0,1,2 = small
+#Types 3,4,5 = large
+main <- main %>% mutate(target = case_when(typ <= 2 ~ "small", 
+                                         typ > 2  ~ "large")
+                      )
+
+
+#convert some variables to factors
+main$col    <-as.factor(main$col)
+main$spc    <-as.factor(main$spc  )
+main$typ    <-as.factor(main$typ)
+main$target <-as.factor(main$target)
+
+#main
+```
+
+```{r}
+#look for correlation between variables
+#possible issue with lum*rad (.82); lum*mag(.71); mag*rad(.68)
+cor(main[,1:4])
+```
+
+```{r, output=FALSE}
+#look for outliers which may introduce problems
+#outliers exist in Temperature, L, R; none in A_M
+#boxplot(main$Temperature)
+#boxplot(main$L)
+#boxplot(main$R)
+#boxplot(main$A_M)
+
+#identify the outliers using a boxplot function
+out_T_indexes <- which(main$tmp %in% boxplot(main$tmp)$out)
+out_L_indexes <- which(main$lum %in% boxplot(main$lum)$out)
+out_R_indexes <- which(main$rad %in% boxplot(main$rad)$out)
+
+#52 identified unique outlier rows
+out_indexes  <- unique(c(out_T_indexes, out_L_indexes, out_R_indexes))
+
+#filter out the rows with the targeted indices
+#row count is 188 now instead of 240 (52 removed)
+main <- main %>% filter(!row_number() %in% out_indexes)
+
+#remove unnecessary columns (prediction will be based on numeric columns)
+main<-main[,c(1,2,3,4,8)]
+
+#preview
+#main
+```
+
+```{r}
+#normalize the data values between 0 and 1
+#temp1 <- preProcess(as.data.frame(main[,1:4]), method=c("range"))
+temp1 <- preProcess(as.data.frame(main[,1:4]), method=c("center", "scale"))
+temp2 <- predict(temp1, as.data.frame(main[,1:4]))
+#temp2
+
+#replace columns with normalized values
+main[,1:4]<-temp2
+
+#preview
+main
+
+```
+
+
+## Stepwise model selection
+```{r, warning=FALSE}
+#create a full model with all predictors
+lrm_full <- glm(target ~., data = split_train, family = "binomial")
+coef(lrm_full)
+```
+
+```{r, warning=FALSE}
+#stepwise model
+lrm_step <- lrm_full %>% stepAIC(trace = FALSE)
+coef(lrm_step)
+```
+```{r}
+probabilities <- lrm_full %>% predict(split_test, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "pos", "neg")
+
+# Prediction accuracy
+observed.classes <- split_test$target
+mean(predicted.classes == observed.classes)
+```
+```{r}
+probabilities <- predict(lrm_step, split_test, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "pos", "neg")
+# Prediction accuracy
+observed.classes <- split_test$target
+mean(predicted.classes == observed.classes)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Logistic Model with Cross validation
+
+```{r}
+#split the dataset into training and validation subsets
+
+#split the data  
+split <- createDataPartition(main$target, p = 0.7, list = FALSE)
+
+#generate the train and test subsets
+split_train <- main[split, ]
+split_test  <- main[-split, ]
+```
+
+
+```{r}
+#train a logistic regression model using the general linear model (glm) function
+#use the numeric data
+
+#this larger model results in perfect predictions so we won't use it
+#lrm <- glm(target ~ tmp + lum + rad + mag, data = split_train, family = "binomial")
+
+lrm <- glm(target ~ mag, data = split_train, family = "binomial")
+```
+
+```{r}
+#train control
+#sampling methods: "boot", "cv", "LOOCV", "LGOCV", "repeatedcv", "timeslice", "none" and "oob"
+#https://topepo.github.io/caret/model-training-and-tuning.html#control
+tc <- trainControl(method = "cv", number = 10, summaryFunction = twoClassSummary, classProbs = TRUE)
+
+#cross validation
+cv <- train(target ~ mag, data = split_train, method = "glm", trControl = tc, metric = "ROC")
+```
+
+```{r}
+#generate predictions using the held-out test data
+predictions <- predict(cv, newdata = split_test, type = "raw")
+
+#generate the confusion matrix with the predictions and test data values
+confusionMatrix(predictions, split_test$target)
+```
+

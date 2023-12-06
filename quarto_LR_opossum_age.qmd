@@ -1,0 +1,51 @@
+---
+title: "Linear Regression Lesson Idea: Opossum Age"
+format: html
+editor: visual
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(DAAG)
+library(tidyverse)
+```
+
+
+```{r}
+#load data
+data(possum)
+
+#store data as a tibble
+main<-as_tibble(possum)
+
+#preview
+main
+```
+
+```{r}
+variables<-names(main)
+variables
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```

@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Welcome\nWelcome to the course…"
+  },
+  {
+    "objectID": "contact.html#lead-instructor",
+    "href": "contact.html#lead-instructor",
+    "title": "2  Contact Information",
+    "section": "2.1 Lead Instructor",
+    "text": "2.1 Lead Instructor\nContact information: abc123"
+  },
+  {
+    "objectID": "contact.html#teaching-assistants",
+    "href": "contact.html#teaching-assistants",
+    "title": "2  Contact Information",
+    "section": "2.2 Teaching Assistants",
+    "text": "2.2 Teaching Assistants\nContact information: abc123"
+  },
+  {
+    "objectID": "subject.html",
+    "href": "subject.html",
+    "title": "3  Subject Information",
+    "section": "",
+    "text": "Information"
+  },
+  {
+    "objectID": "policies.html",
+    "href": "policies.html",
+    "title": "4  Policies",
+    "section": "",
+    "text": "Information"
+  },
+  {
+    "objectID": "calendar.html",
+    "href": "calendar.html",
+    "title": "5  Calendar",
+    "section": "",
+    "text": "Information"
+  },
+  {
+    "objectID": "grading.html",
+    "href": "grading.html",
+    "title": "6  Grading Information",
+    "section": "",
+    "text": "Information"
+  },
+  {
+    "objectID": "conduct.html",
+    "href": "conduct.html",
+    "title": "7  Academic Conduct",
+    "section": "",
+    "text": "Information"
+  },
+  {
+    "objectID": "mandatory.html",
+    "href": "mandatory.html",
+    "title": "8  Additional Information",
+    "section": "",
+    "text": "Information"
+  }
+]
