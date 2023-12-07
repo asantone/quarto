@@ -1,0 +1,103 @@
+---
+title: "An Assignment with Markdown"
+format: pdf
+---
+
+# Introduction
+
+This is the introductory text for the assignment. 
+
+# Takeaways
+
+* Takeaway A
+* Takeaway B
+* Takeaway C
+* Takeaway D
+* Takeaway E
+
+# Key Terms
+
+First Term
+: definition of the first term.
+
+Second Term
+: definition of the second term.
+
+Third Term
+: definition of the third term.
+
+Formula 
+: $i^2 = j^2 = k^2 = ijk = −1$
+
+{{< pagebreak >}}
+
+# Species
+
+::: {layout="[30,30,30]" layout-valign="bottom"}
+![Species A](tree_01.png)
+
+![Species B](tree_02.png)
+
+![Species C](tree_03.png)
+:::
+
+
+# Supporting Data
+
+| Species|Count|Location|Environment        |
+|:-------|----:|:-------|:------------------|
+| A      | 43  |   MA   | Deciduous Forest  |
+| B      | 16  |   LA   | Marsh             |
+| C      | 28  |   FL   | Ephemeral Wetland |
+
+: Species Table {tbl-colwidths="[15,15,25,35]"}
+
+# The Process
+
+```{mermaid}
+%%| fig-width: 6.0
+flowchart LR
+  A[Read the assignment]--> B(Small Group Discussion)
+  B --> C{Decision}
+  C --> D[Group Selections] 
+  C --> E[Group Rejections]
+```
+
+# Code Review
+
+### Python Example
+
+A simple linear plot drawn using Python and the `matplotlib` library.  
+
+```{python}
+#| echo: true
+
+import matplotlib.pyplot as plt
+plt.plot([0,1,2,3])
+plt.show()
+```
+
+### R Example
+
+A simple linear plot drawn using R and base R graphics.
+
+```{r}
+#| echo: true
+
+plot(c(0,1,2,3), type="l")
+```
+
+{{< pagebreak >}}
+
+# The Assignment
+
+## Details
+
+details...
+
+## Instructions
+
+instructions...
+
+
+
