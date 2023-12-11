@@ -13,8 +13,8 @@ A rendering of time signatures from the song *Schism* by the band **Tool**. Colo
 
 
 * [Source](https://musescore.com/user/6831511/scores/4151846)
-* [Data (.csv)]()
-* [File (.qmd)]() 
+* [Data (.csv)](https://github.com/asantone/quarto/blob/main/tool/time_signatures.csv)
+* [Files (.qmd)](https://github.com/asantone/quarto/tree/main/tool) 
 
 ---
 
