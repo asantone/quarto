@@ -1,0 +1,38 @@
+---
+title: "Tool Time Signature Visualization(s)"
+execute:
+  echo: false
+  warning: false
+---
+
+## Lateralus
+
+#### Schism
+
+A rendering of time signatures from the song *Schism* by the band **Tool**. Color is applied when a time signature differs from the value immediately preceding it. Each data point represents one bar and all time signatures have been normalized to sixteenths. From this visualization, you can see there is a section of frequent time signature change from bars 55 to 69.
+
+
+* [Source](https://musescore.com/user/6831511/scores/4151846)
+* [Data (.csv)]()
+* [File (.qmd)]() 
+
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+#read in the data
+main<-read_csv("time_signatures.csv")
+```
+
+```{r}
+ggplot(main, aes(x=bar, y=sixteens))+
+  geom_point(aes(color=factor(different)))+
+  scale_colour_manual(values=c("#000000", "#00aaff"))+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+---
