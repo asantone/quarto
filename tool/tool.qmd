@@ -36,3 +36,42 @@ ggplot(main, aes(x=bar, y=sixteens))+
 ```
 
 ---
+
+## Lateralus
+
+#### Lateralus
+
+A rendering of time signatures from the song *Lateralus* by the band **Tool**. Color is applied when a time signature differs from the value immediately preceding it. Each data point represents one bar and all time signatures have been normalized to sixteenths. From this visualization, you can see there is a section of frequent time signature change from bars 84 to 104 and a total of about 43 time signature shifts. 
+
+Notably, there are also two specifically-identified [polyrhythmic](https://en.wikipedia.org/wiki/Polyrhythm) sections on top of 6/8: a section with 5/8 from bars 111 to 130 and a section of 4/8 from bars 181 to 205. Danny Carey is recognized for [his use of complex time signatures](https://www.drumeo.com/beat/danny-carey-genius/). 
+
+
+* [Source](https://musescore.com/arindam_octaves101/lateralus)
+* [Data (.csv)](https://github.com/asantone/quarto/blob/main/tool/time_signatures.csv)
+* [Files (.qmd)](https://github.com/asantone/quarto/tree/main/tool) 
+
+---
+
+```{r}
+#readxl needed for sheet-specific data import
+library(tidyverse)
+library(readxl)
+```
+
+```{r}
+#read in the data
+main<-read_excel("time_signatures.xlsx", "lateralus")
+
+#define a specific color for a second data series
+color_polyrhythm<-"#ff3300"
+```
+
+```{r}
+#visualization but the y values are specified in the geom_point calls
+ggplot(main, aes(x=bar))+
+  geom_point(aes(y = sixteens, color=factor(different)))+
+  geom_point(aes(y = poly_sixteens, color=color_polyrhythm))+
+  scale_colour_manual(values=c(color_polyrhythm, "#000000", "#00aaff"))+
+  theme_void()+
+  theme(legend.position="none")
+```
